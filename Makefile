@@ -14,7 +14,9 @@ s_build_openwrt: s_install_feeds
 		fi; \
 		cp -vf ../config-xiaomi-mini .config; \
 		[ -f ../.config.extra ] && cat ../.config.extra >> .config || :
-	make -C $(openwrt_dir) V=s -j4
+	#make -C $(openwrt_dir) V=s -j4
+	ln -sf ../dl dl
+	make -C $(openwrt_dir) V=s -j 2
 
 s_install_feeds: s_update_feeds
 	@cd $(openwrt_dir); ./scripts/feeds install $(openwrt_feeds);
